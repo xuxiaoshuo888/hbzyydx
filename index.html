@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/animate.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div id="app" >
+        <div class="fullscreen" :class="{blur:bgBlur}">
+            <div class="center-contain">
+                <div class="logo-contain" :class="{'hide-logo':!showLogo}">
+                    <img src="./img/logo.png" class="logo-img" alt="暂无图片">
+                    <img src="./img/text1.png" class="text1-img" alt="暂无图片" srcset="">
+                </div>
+                <img src="./img/text2.png" class="text2-img" :class="{'top-small':!showLogo}" alt="">
+                <div v-if="showLogo" class="login-type-div">
+                    <div @click="showWechart" class="login-type-button" style="margin-right: 20px;">
+                        <img src="./img/logintype-wechart.png" class="logintype-img" alt=""
+                            srcset="">
+                        微信登录
+                    </div>
+                    <div class="login-type-button">
+                        <img src="./img/logintype-password.png" class="logintype-img" alt="" srcset="">
+                        密码登录</div>
+                </div>
+                <div v-if="showWx" class="qrcode-contain animate__animated" :class="{'animate__fadeInUp':showWx}">
+                    <div class="qrcode-text1">微信登录</div>
+                    <img src="./img/qrcode.png" class="qrcode-img" alt="" srcset="">
+                    <div class="qrcode-text2">请使用微信扫描二维码登录</div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div v-if="showFootBtn" class="footer-btn-div animate__animated" :class="{'animate__fadeInUp':showFootBtn}">
+                    <div class="footer-btn" @click="backTohome">
+                        <img src="./img/btn-close.png" alt="" srcset="">
+                        <span>登录方式</span>
+                    </div>
+                    <div class="footer-btn">
+                        <img src="./img/btn-lock.png" alt="" srcset="">
+                        <span>忘记密码</span>
+                    </div>
+                </div>
+                <div class="footer-info">建议用户使用谷歌、火狐、IE9及以上浏览器，360浏览器请使用极速模式访问</div>
+            </footer>
+        </div>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script type="text/javascript">
+        const app = new Vue({
+            el: "#app",
+            data: {
+                bgBlur: true,//是否启用背景虚化
+                showLogo: true,//是否展示logo
+                showWx:false,//是否展示微信二维码
+                showLoginInput:false,//是否展示账密输入框
+                showFootBtn:false,//展示底部按钮
+            },
+            methods: {
+                showWechart() {//切换到微信登录
+                    this.showLogo = false;//隐藏logo,按钮
+                    this.showWx = true;//展示二维码
+                    this.showFootBtn = true;//展示底部按钮
+                },
+                backTohome(){
+                    this.showLogo = true;
+                    this.showWx = false;//展示二维码
+                    this.showFootBtn = false;//展示底部按钮
+                }
+            },
+            mounted() {
+
+            }
+        })
+    </script>
+</body>
+
+</html>
